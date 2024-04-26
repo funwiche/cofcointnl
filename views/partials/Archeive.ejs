@@ -1,0 +1,36 @@
+<section class="p-4 md:p-12">
+  <div class="mx-auto max-w-[910px]">
+    <% if (items.length){ %>
+    <div class="grid sm:grid-cols-2 gap-6 sm:gap-12">
+      <% items.forEach(item=> { %>
+      <a href="/product/<%= item.id %>" class="flex flex-col">
+        <div class="aspect-[4/3] mb-3 bg-zinc-200 p-px">
+          <img
+            src="<%= item.images[0] %>"
+            alt="<%= item.title %>"
+            class="h-full w-full object-cover object-center"
+          />
+        </div>
+        <div>
+          <span class="text-[24px] font-bold font-serif">
+            <%= new Intl.NumberFormat('en-US', {style: 'currency',currency:
+            'USD',}).format(item.price) %>
+          </span>
+          <h3 class="mb-4 text-[24px] line-clamp-2"><%= item.title %></h3>
+          <span class="btn btn-tax">
+            <svg width="0" height="0" viewBox="0 0 20.84 18.3">
+              <path
+                d="m14.2.99-9.02.94-3.71 8.24 5.32 7.31 9.03-.94 3.7-8.24L14.2.99z"
+              />
+            </svg>
+            <span class="capitalize text-[12px]">
+              <%= item.cat.replace('-',' & ') %>
+            </span>
+          </span>
+        </div>
+      </a>
+      <% }); %>
+    </div>
+    <% } %>
+  </div>
+</section>

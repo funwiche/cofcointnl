@@ -1,0 +1,142 @@
+<main id="maincontent" class="site__main">
+  <article class="page">
+    <div class="mod mod-utilities mod--indented">
+      <div class="mod__inner">
+        <ul class="breadcrumbs">
+          <li class="breadcrumbs__crumb">
+            <a href="/" data-uw-rm-brl="PR" data-uw-original-href="/">Home</a>
+            <span class="breadcrumbs__divide"></span>
+          </li>
+          <li class="breadcrumbs__crumb">
+            <a
+              href="/products-services/"
+              data-uw-rm-brl="PR"
+              data-uw-original-href="/products-services/"
+              >Products</a
+            >
+            <span class="breadcrumbs__divide"></span>
+          </li>
+          <li class="breadcrumbs__current"><%- item.title %></li>
+        </ul>
+      </div>
+    </div>
+    <section class="p-4 md:p-12">
+      <div class="mx-auto max-w-[910px]">
+        <section class="grid md:grid-cols-5 gap-8 md:gap-12 mb-12">
+          <div class="md:col-span-3">
+            <div class="mb-4 aspect-[4/3] border bg-black">
+              <img
+                id="img-expanded"
+                onclick="toggle_object(this)"
+                src="<%- item.images[0] %>"
+                class="h-full w-full object-center object-cover"
+              />
+            </div>
+            <div class="overflow-x-auto">
+              <div class="flex gap-2">
+                <% item.images.forEach(img=> { %>
+                <div
+                  class="aspect-[4/3] border max-w-32 min-w-32 opacity-80 hover:opacity-100 cursor-pointer"
+                >
+                  <img
+                    onclick="add_img(this)"
+                    src="<%- img %>"
+                    class="h-full w-full object-cover object-center"
+                  />
+                </div>
+                <% }); %>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-2">
+            <div>
+              <h3 class="mb-5 text-[32px] font-black line-clamp-2">
+                <%= item.title %>
+              </h3>
+              <div class="">
+                <span class="btn btn-tax">
+                  <svg width="0" height="0" viewBox="0 0 20.84 18.3">
+                    <path
+                      d="m14.2.99-9.02.94-3.71 8.24 5.32 7.31 9.03-.94 3.7-8.24L14.2.99z"
+                    />
+                  </svg>
+                  <span class="capitalize text-[12px]">
+                    <%= item.cat.replace('-',' & ') %>
+                  </span>
+                </span>
+              </div>
+              <div class="text-[32px] font-bold font-serif mb-4">
+                <%= new Intl.NumberFormat('en-US', {style: 'currency',currency:
+                'USD',}).format(item.price) %>
+              </div>
+              <div class="py-8">
+                <a
+                  href="#request-quote"
+                  class="bg-[#333333] hover:bg-black text-white px-12 py-6"
+                >
+                  Request Quote
+                </a>
+              </div>
+              <div class="">
+                <h2 class="font-bold mb-4 text-[28px]">Description</h2>
+                <p><%= item.desc %></p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="request-quote" class="mb-8 py-12 border-t">
+          <h2 class="font-bold mb-6 text-[28px]">Request Quote</h2>
+          <form>
+            <div class="grid gap-8 md:gap-12 md:grid-cols-2 mb-8">
+              <div>
+                <div class="mb-8">
+                  <label class="font-bold font-serif">Full Name</label>
+                  <input
+                    required
+                    class="px-6 h-[48px] border outline-none block w-full"
+                    name="name"
+                    value="John Doe"
+                  />
+                </div>
+                <div class="mb-8">
+                  <label class="font-bold font-serif">Email</label>
+                  <input
+                    required
+                    type="emai"
+                    class="px-6 h-[48px] border outline-none block w-full"
+                    name="email"
+                    value="johnjoe@email.com"
+                  />
+                </div>
+                <div>
+                  <label class="font-bold font-serif">Phone</label>
+                  <input
+                    required
+                    type="tel"
+                    class="px-6 h-[48px] border outline-none block w-full"
+                    name="phone"
+                    value="+1 203 439 8809"
+                  />
+                </div>
+              </div>
+              <div class="flex flex-col">
+                <label class="font-bold font-serif">Message</label>
+                <textarea
+                  required
+                  class="h-full min-h-60 border p-6 block w-full resize-none outline-none flex-1"
+                >
+Even if you add a currency sign, it doesn’t fix the problem because you      would want to add commas and decimals in the correct positions. You’d also want each price output based on the currency with proper formatting.
+
+For example, 14340 would be $14,340.00 (US Dollars) or ₹14,340.00 (Rupees) or €14.340,00 (Euross) and so on, depending on your defined currency, locale, and style. And you can convert these numbers into currencies using the Intl.NumberFormat() method in JavaScript.</textarea
+                >
+              </div>
+            </div>
+            <button class="bg-[#333333] hover:bg-black text-white px-12 py-6">
+              Submit Quote
+            </button>
+          </form>
+        </section>
+      </div>
+    </section>
+  </article>
+</main>

@@ -1,0 +1,27 @@
+{
+  "name": "illumbank",
+  "version": "1.0.0",
+  "description": "Illumbank N.V. USA",
+  "main": "app.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "nodemonConfig": {
+    "events": {
+      "start": "clear"
+    }
+  },
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "express-ejs-layouts": "^2.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=16.20.1"
+  }
+}
