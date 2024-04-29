@@ -1,18 +1,19 @@
 [
-  {
-    "name": "Coffee",
-    "slug": "coffee"
-  },
-  {
-    "name": "Cotton",
-    "slug": "cotton"
-  },
-  {
-    "name": "Grains & oilseeds",
-    "slug": "grains-oilseeds"
-  },
-  {
-    "name": "Sugar",
-    "slug": "sugar"
-  }
+  { "name": "quatic Products", "slug": "quatic-products" },
+  { "name": "Baby Foods", "slug": "baby-foods" },
+  { "name": "Bean Products", "slug": "bean-products" },
+  { "name": "Beverages", "slug": "beverages" },
+  { "name": "Canned Food", "slug": "canned-food" },
+  { "name": "Edible Fats & Oils", "slug": "edible-fats_oils" },
+  { "name": "Frozen Foods", "slug": "frozen-foods" },
+  { "name": "Fruit", "slug": "fruit" },
+  { "name": "Meat & Poultry", "slug": "meat_poultry" },
+  { "name": "Milk & Dairy Products", "slug": "milk_dairy-products" },
+  { "name": "Nuts & Kernels", "slug": "nuts_kernels" },
+  { "name": "Rice & Grains", "slug": "rice_grains" },
+  { "name": "Spices & Seasonings", "slug": "spices_seasonings" },
+  { "name": "Starch & Flour", "slug": "starch_flour" },
+  { "name": "Sugar & Sweeteners", "slug": "sugar_sweeteners" },
+  { "name": "Tea", "slug": "tea" },
+  { "name": "Vegetables", "slug": "vegetables" }
 ]

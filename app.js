@@ -16,6 +16,13 @@ app.get("", (req, res) =>
     path: "/",
   })
 );
+app.get("/products", (req, res) => {
+  res.render("products/index", {
+    title: "Products - COFCO International",
+    path: "/products",
+    url: "https://mattssonsaktiebolag.com",
+  });
+});
 app.get("/search", (req, res) =>
   res.render("search", {
     title: "Search  - COFCO International",
