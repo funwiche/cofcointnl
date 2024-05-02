@@ -1,13 +1,11 @@
 <main id="maincontent" class="site__main">
   <article class="page">
     <iframe
-      id="products_frame"
-      src="<%- url %>"
+      id="my_iframe"
+      src="<%- api %><%- path %>"
       title="<%- title %>"
       allowtransparency="true"
-      scrolling="no"
-      width="100%"
-      height="1000"
-    />
+      style="width: 100%; border: none"
+    ></iframe>
   </article>
 </main>

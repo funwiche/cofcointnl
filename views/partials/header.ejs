@@ -212,12 +212,12 @@
             data-draw_hover=""
           >
             <a
-              href="/products-services/"
-              title="Products &amp; Services"
+              href="/products/"
+              title="Services"
               data-uw-rm-brl="PR"
-              data-uw-original-href="/products-services/"
+              data-uw-original-href="/services/"
             >
-              <span>Products &amp; Services</span>
+              <span>Products</span>
               <svg width="0" height="0" viewBox="0 0 13 13">
                 <path d="M11.4 2.6 12.9 4l-6.4 6.4L.1 4l1.5-1.4 4.9 5z"></path>
               </svg>
@@ -231,54 +231,102 @@
               >
                 <li class="menu-main__item menu-main__item--secondary">
                   <a
-                    href="/products-services/"
-                    title="Products &amp; Services"
+                    href="/products"
+                    title="Services"
                     data-uw-rm-brl="PR"
-                    data-uw-original-href="/products-services/"
+                    data-uw-original-href="/products"
+                    >Overview</a
+                  >
+                </li>
+                <% categories.forEach(item=> { %>
+                <li class="menu-main__item menu-main__item--secondary">
+                  <a
+                    href="/products/<%= item.slug %>"
+                    data-uw-rm-brl="PR"
+                    data-uw-original-href="/products/<%= item.slug %>"
+                  >
+                    <span><%= item.name %></span>
+                  </a>
+                </li>
+                <% }); %>
+
+                <!--  -->
+              </menu>
+            </div>
+          </li>
+          <li
+            class="menu-main__item menu-main__item--primary"
+            data-drawtoggle="false"
+            data-draw_hover=""
+          >
+            <a
+              href="/services/"
+              title="Services"
+              data-uw-rm-brl="PR"
+              data-uw-original-href="/services/"
+            >
+              <span>Services</span>
+              <svg width="0" height="0" viewBox="0 0 13 13">
+                <path d="M11.4 2.6 12.9 4l-6.4 6.4L.1 4l1.5-1.4 4.9 5z"></path>
+              </svg>
+            </a>
+            <div data-draw="" class="menu__draw">
+              <menu
+                class="menu menu-main--secondary"
+                aria-hidden="true"
+                aria-expanded="false"
+                aria-label="submenu"
+              >
+                <li class="menu-main__item menu-main__item--secondary">
+                  <a
+                    href="/services/"
+                    title="Services"
+                    data-uw-rm-brl="PR"
+                    data-uw-original-href="/services/"
                     >Overview</a
                   >
                 </li>
                 <li class="menu-main__item menu-main__item--secondary">
                   <a
-                    href="/products-services/grains-oilseeds/"
+                    href="/services/grains-oilseeds/"
                     data-uw-rm-brl="PR"
-                    data-uw-original-href="/products-services/grains-oilseeds/"
+                    data-uw-original-href="/services/grains-oilseeds/"
                   >
                     <span>Grains &amp; oilseeds</span>
                   </a>
                 </li>
                 <li class="menu-main__item menu-main__item--secondary">
                   <a
-                    href="/products-services/sugar/"
+                    href="/services/sugar/"
                     data-uw-rm-brl="PR"
-                    data-uw-original-href="/products-services/sugar/"
+                    data-uw-original-href="/services/sugar/"
                   >
                     <span>Sugar</span>
                   </a>
                 </li>
                 <li class="menu-main__item menu-main__item--secondary">
                   <a
-                    href="/products-services/coffee/"
+                    href="/services/coffee/"
                     data-uw-rm-brl="PR"
-                    data-uw-original-href="/products-services/coffee/"
+                    data-uw-original-href="/services/coffee/"
                   >
                     <span>Coffee</span>
                   </a>
                 </li>
                 <li class="menu-main__item menu-main__item--secondary">
                   <a
-                    href="/products-services/cotton/"
+                    href="/services/cotton/"
                     data-uw-rm-brl="PR"
-                    data-uw-original-href="/products-services/cotton/"
+                    data-uw-original-href="/services/cotton/"
                   >
                     <span>Cotton</span>
                   </a>
                 </li>
                 <li class="menu-main__item menu-main__item--secondary">
                   <a
-                    href="/products-services/freight/"
+                    href="/services/freight/"
                     data-uw-rm-brl="PR"
-                    data-uw-original-href="/products-services/freight/"
+                    data-uw-original-href="/services/freight/"
                   >
                     <span>Freight</span>
                   </a>

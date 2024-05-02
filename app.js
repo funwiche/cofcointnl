@@ -4,6 +4,11 @@ const app = express();
 const products = require("./resources/products.json");
 const categories = require("./resources/categories.json");
 // Global Middlewares
+app.use((req, res, next) => {
+  res.locals.categories = categories;
+  res.locals.api = "https://cofcointnl.web.app";
+  next();
+});
 app.use(expressLayouts);
 app.use(express.json());
 app.set("view engine", "ejs");
@@ -16,13 +21,59 @@ app.get("", (req, res) =>
     path: "/",
   })
 );
+/// #################################################### //
+/// WebView
 app.get("/products", (req, res) => {
-  res.render("products/index", {
+  res.render("webview", {
     title: "Products - COFCO International",
     path: "/products",
-    url: "https://mattssonsaktiebolag.com",
   });
 });
+app.get("/products/:cat", (req, res) => {
+  const { cat } = req.params;
+  const item = categories.find((el) => el.slug == cat);
+  if (!item)
+    return res.render("404", {
+      title: "Product not found",
+      path: "/products/" + cat,
+    });
+  res.render("webview", {
+    title: item.name + " - COFCO International",
+    path: `/products/${cat}`,
+  });
+});
+app.get("/products/:cat/:id", async (req, res) => {
+  const { id, cat } = req.params;
+  try {
+    const item = categories.find((el) => el.slug == cat);
+    if (!item) throw Error();
+    const product = products.find((el) => el.id == id);
+    if (!product) throw Error();
+    res.render("webview", {
+      title: product.title + " - COFCO International",
+      path: `/products/${cat}/${id}`,
+    });
+  } catch (error) {
+    res.render("404", {
+      title: "Product not found",
+      path: `/products/${cat}/${id}`,
+    });
+  }
+});
+
+app.get("/extranet", (req, res) =>
+  res.render("webview", {
+    title: "Dashboard - COFCO International",
+    path: "/extranet",
+  })
+);
+app.get("/contact-us", (req, res) =>
+  res.render("contact-us", {
+    title: "Contact Us  - COFCO International",
+    path: "/contact-us",
+  })
+);
+/// #################################################### //
 app.get("/search", (req, res) =>
   res.render("search", {
     title: "Search  - COFCO International",
@@ -41,12 +92,7 @@ app.get("/accessibility", (req, res) =>
     path: "/accessibility",
   })
 );
-app.get("/contact-us", (req, res) =>
-  res.render("contact-us", {
-    title: "Contact Us  - COFCO International",
-    path: "/contact-us",
-  })
-);
+
 app.get("/cookie-policy", (req, res) =>
   res.render("cookie-policy", {
     title: "Cookie Policy  - COFCO International",
@@ -83,63 +129,48 @@ app.get("/procurement-gtcs", (req, res) =>
     path: "/procurement-gtcs",
   })
 );
-app.get("/products-services", (req, res) =>
-  res.render("products-services", {
-    title: "Products & Services  - COFCO International",
-    path: "/products-services",
+app.get("/services", (req, res) =>
+  res.render("services", {
+    title: "Services  - COFCO International",
+    path: "/services",
   })
 );
-app.get("/products-services/coffee", (req, res) => {
+app.get("/services/coffee", (req, res) => {
   const items = products.filter((el) => el.cat == "coffee");
-  res.render("products-services_coffee", {
-    title: "Coffee - Products & Services - COFCO International",
-    path: "/products-services/coffee",
+  res.render("services_coffee", {
+    title: "Coffee - Services - COFCO International",
+    path: "/services/coffee",
     items,
   });
 });
-app.get("/products-services/cotton", (req, res) => {
+app.get("/services/cotton", (req, res) => {
   const items = products.filter((el) => el.cat == "cotton");
-  res.render("products-services_cotton", {
-    title: "Cotton - Products & Services - COFCO International",
-    path: "/products-services/cotton",
+  res.render("services_cotton", {
+    title: "Cotton - Services - COFCO International",
+    path: "/services/cotton",
     items,
   });
 });
-app.get("/products-services/freight", (req, res) =>
-  res.render("products-services_freight", {
-    title: "Freight - Products & Services - COFCO International",
-    path: "/products-services/freight",
+app.get("/services/freight", (req, res) =>
+  res.render("services_freight", {
+    title: "Freight - Services - COFCO International",
+    path: "/services/freight",
   })
 );
-app.get("/products-services/grains-oilseeds", (req, res) => {
+app.get("/services/grains-oilseeds", (req, res) => {
   const items = products.filter((el) => el.cat == "grains-oilseeds");
-  res.render("products-services_grains-oilseeds", {
-    title: "Grains & oilseeds - Products & Services - COFCO International",
-    path: "/products-services/grains-oilseeds",
+  res.render("services_grains-oilseeds", {
+    title: "Grains & oilseeds - Services - COFCO International",
+    path: "/services/grains-oilseeds",
     items,
   });
 });
-app.get("/products-services/sugar", (req, res) => {
+app.get("/services/sugar", (req, res) => {
   const items = products.filter((el) => el.cat == "sugar");
-  res.render("products-services_sugar", {
-    title: "Sugar - Products & Services - COFCO International",
-    path: "/products-services/sugar",
+  res.render("services_sugar", {
+    title: "Sugar - Services - COFCO International",
+    path: "/services/sugar",
     items,
-  });
-});
-app.get("/product/:id", (req, res) => {
-  const id = req.params.id;
-  const item = products.find((el) => el.id == id);
-  if (!item)
-    return res.render("404", {
-      title: "Product not found",
-      path: "/products/" + id,
-    });
-  // const cat = categories.find()
-  res.render("product-details", {
-    title: item.title + " - COFCO International",
-    path: "/products/" + id,
-    item,
   });
 });
 app.get("/sustainability", (req, res) =>
