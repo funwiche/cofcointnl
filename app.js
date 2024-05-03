@@ -1,6 +1,7 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const app = express();
+const routes = require("./resources/routes.json");
 const products = require("./resources/products.json");
 const categories = require("./resources/categories.json");
 // Global Middlewares

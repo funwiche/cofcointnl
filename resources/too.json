@@ -1,7 +1,14 @@
 [
+  { "name": "Aquatic Products", "slug": "aquatic-products" },
+  { "name": "Baby Foods", "slug": "baby-foods" },
+  { "name": "Canned Food", "slug": "canned-food" },
+  { "name": "Frozen Foods", "slug": "frozen-foods" },
+  { "name": "Starch & Flour", "slug": "starch_flour" },
+  { "name": "Tea", "slug": "tea" },
+
+  { "name": "Bean Products", "slug": "bean-products" },
   { "name": "Nuts & Seeds", "slug": "nuts_seeds" },
   { "name": "Rice & Grains", "slug": "rice_grains" },
-  { "name": "Bean Products", "slug": "bean-products" },
   { "name": "Beer, Wine & Spirits", "slug": "beer-wine_spirits" },
   { "name": "Soft drinks", "slug": "soft-drinks" },
   { "name": "Milk & Dairy Products", "slug": "milk_dairy-products" },
@@ -10,8 +17,7 @@
   { "name": "Spices & Seasonings", "slug": "spices_seasonings" },
   { "name": "Sugar & Sweeteners", "slug": "sugar_sweeteners" },
   { "name": "Fruits & Vegetables", "slug": "fruit_vegetables" },
-  { "name": "Biscuits, Snacks & Cereals", "slug": "biscuits-snacks_cereals" },
-  { "name": "Chocolate drops", "slug": "chocolate-drops" },
   { "name": "A4 copy paper", "slug": "a4-copy-paper" },
-  { "name": "General scrap", "slug": "general-scrap" }
+  { "name": "General scrap", "slug": "general-scrap" },
+  { "name": "Chocolate drops", "slug": "chocolate-drops" }
 ]
