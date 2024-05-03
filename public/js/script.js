@@ -16,6 +16,13 @@
 //   const message = el.target.querySelector("textarea").value;
 // }
 function resizeIframe(event) {
-  document.getElementById("my_iframe").style.height = event.data + "px";
+  const iframe = document.getElementById("my_iframe");
+  const [key, val] = event.data.split("=");
+  if (key == "height") {
+    iframe.style.height = val;
+    iframe.setAttribute("scrolling", "no");
+    return;
+  }
+  if (key == "url") location.href = event.data.split("url=")[1];
 }
 window.addEventListener("message", resizeIframe, false);

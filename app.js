@@ -7,6 +7,7 @@ const categories = require("./resources/categories.json");
 // Global Middlewares
 app.use((req, res, next) => {
   res.locals.categories = categories;
+  // res.locals.api = "http://localhost:3000";
   res.locals.api = "https://cofcointnl.web.app";
   next();
 });
@@ -25,9 +26,10 @@ app.get("", (req, res) =>
 /// #################################################### //
 /// WebView
 app.get("/products", (req, res) => {
-  res.render("webview", {
+  res.render("products-archive", {
     title: "Products - COFCO International",
-    path: "/products",
+    path: `/products`,
+    page: req.query.page || 1,
   });
 });
 app.get("/products/:cat", (req, res) => {
@@ -36,11 +38,12 @@ app.get("/products/:cat", (req, res) => {
   if (!item)
     return res.render("404", {
       title: "Product not found",
-      path: "/products/" + cat,
+      path: `/products/${cat}`,
     });
-  res.render("webview", {
+  res.render("products-archive", {
     title: item.name + " - COFCO International",
     path: `/products/${cat}`,
+    page: req.query.page || 1,
   });
 });
 app.get("/products/:cat/:id", async (req, res) => {
@@ -50,7 +53,7 @@ app.get("/products/:cat/:id", async (req, res) => {
     if (!item) throw Error();
     const product = products.find((el) => el.id == id);
     if (!product) throw Error();
-    res.render("webview", {
+    res.render("products-single", {
       title: product.title + " - COFCO International",
       path: `/products/${cat}/${id}`,
     });
@@ -63,7 +66,7 @@ app.get("/products/:cat/:id", async (req, res) => {
 });
 
 app.get("/extranet", (req, res) =>
-  res.render("webview", {
+  res.render("products-archive", {
     title: "Dashboard - COFCO International",
     path: "/extranet",
   })

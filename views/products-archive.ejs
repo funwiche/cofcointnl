@@ -2,10 +2,10 @@
   <article class="page">
     <iframe
       id="my_iframe"
-      src="<%- api %><%- path %>"
+      src="<%- api %><%- path %>?page=<%- encodeURIComponent(page) %>"
       title="<%- title %>"
       allowtransparency="true"
-      style="width: 100%; border: none; min-height: 100vh"
+      style="width: 100%; border: none; min-height: calc(100vh - 120px)"
     ></iframe>
   </article>
 </main>
