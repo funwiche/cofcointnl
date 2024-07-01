@@ -1,20 +1,3 @@
-// function toggle_object(el) {
-//   el.classList.toggle("object-cover");
-//   el.classList.toggle("object-contain");
-// }
-// function add_img(el) {
-//   document.getElementById("img-expanded").src = el.src;
-// }
-// document
-//   .querySelector("#request-quote form")
-//   .addEventListener("submit", send_form);
-// function send_form(el) {
-//   el.preventDefault();
-//   const name = el.target.querySelector('[name="name"]').value;
-//   const phone = el.target.querySelector('[name="phone"]').value;
-//   const email = el.target.querySelector('[name="email"]').value;
-//   const message = el.target.querySelector("textarea").value;
-// }
 function resizeIframe(event) {
   const iframe = document.getElementById("my_iframe");
   const [key, val] = event.data.split("=");
@@ -26,3 +9,28 @@ function resizeIframe(event) {
   if (key == "url") location.href = event.data.split("url=")[1];
 }
 window.addEventListener("message", resizeIframe, false);
+function get_path(str) {
+  if (!str) return null;
+  str = str.split("?")[0];
+  return str.split("https://www.cofcointernational.com")[1];
+}
+
+async function download_files() {
+  const sources = document.querySelectorAll("picture source");
+  const images = document.querySelectorAll("img");
+  [...Array.from(sources), ...Array.from(images)].forEach((img) => {
+    let src = img.getAttribute("src");
+    let srcset = img.getAttribute("srcset");
+    if (get_path(srcset)) img.setAttribute("srcset", get_path(srcset));
+    else if (get_path(src)) img.setAttribute("src", get_path(src));
+  });
+  // const links = [];
+  // images.forEach(async (img) => {
+  //   const src = img.getAttribute("src") || img.getAttribute("srcset");
+  //   if (!get_path(src)) return;
+  //   links.push(src.trim());
+  // });
+  // uri = encodeURIComponent(JSON.stringify(links));
+  // await fetch(`/download-file?uri=${uri}`);
+}
+document.addEventListener("DOMContentLoaded", download_files);

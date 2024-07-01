@@ -1,14 +1,52 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const app = express();
-const routes = require("./resources/routes.json");
 const products = require("./resources/products.json");
 const categories = require("./resources/categories.json");
+// Download
+const axios = require("axios");
+const fs = require("fs");
+const path = require("path");
+// Download Routes
+function get_path(str) {
+  str = str.split("?")[0];
+  str = str.split("cofcointernational.com")[1];
+  return `public${str}`;
+}
+const downloadFile = async (url, downloadPath) => {
+  const writer = fs.createWriteStream(downloadPath);
+  const response = await axios({
+    url,
+    method: "GET",
+    responseType: "stream",
+  });
+  response.data.pipe(writer);
+  return new Promise((resolve, reject) => {
+    writer.on("finish", resolve);
+    writer.on("error", reject);
+  });
+};
+const downloadFolder = async (routes) => {
+  for (const route of routes) {
+    const index = routes.indexOf(route) + 1;
+    const last = routes.length;
+    const downloadPath = get_path(route);
+    fs.mkdirSync(path.dirname(downloadPath), { recursive: true });
+    try {
+      await downloadFile(route, downloadPath);
+      console.log(`${index}/${last}`);
+      if (index >= last) return console.log("complete!");
+    } catch (error) {
+      console.error(`Error downloading ${route}:`, error.message);
+    }
+  }
+};
 // Global Middlewares
 app.use((req, res, next) => {
   res.locals.categories = categories;
-  // res.locals.api = "http://localhost:3000";
   res.locals.api = "https://cofcointnl.web.app";
+  const routes = app._router.stack.map((middleware) => middleware.route);
+  res.locals.routes = routes.filter((el) => el).map((el) => el.path);
   next();
 });
 app.use(expressLayouts);
@@ -23,6 +61,27 @@ app.get("", (req, res) =>
     path: "/",
   })
 );
+app.get("/show-routes", (req, res) => {
+  res.render("routes", { title: "All routes", path: "/show-routes" });
+});
+app.get("/download-file", async (req, res) => {
+  try {
+    let { uri } = req.query;
+    if (!uri) return res.sendStatus(500);
+    const routes = JSON.parse(uri);
+    fs.readFile("routes.json", "utf8", (err, data) => {
+      if (err) return console.log(err);
+      data = [...JSON.parse(data), ...routes];
+      data = JSON.stringify([...new Set(data)]);
+      fs.writeFile("routes.json", data, "utf8", () => null);
+    });
+    await downloadFolder(routes);
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error.message);
+    res.sendStatus(500);
+  }
+});
 /// #################################################### //
 /// WebView
 app.get("/products", (req, res) => {
@@ -735,6 +794,9 @@ app.get("**", (req, res) =>
     path: "**",
   })
 );
+
+// Download assets
+// downloadFolder();
 
 // Start app
 const port = process.env.PORT || 3001;
