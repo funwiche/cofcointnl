@@ -42,6 +42,7 @@ const downloadFolder = async (routes) => {
   }
 };
 // Global Middlewares
+app.use(express.json());
 app.use((req, res, next) => {
   res.locals.categories = categories;
   res.locals.api = "https://cofcointnl.web.app";
@@ -49,8 +50,8 @@ app.use((req, res, next) => {
   res.locals.routes = routes.filter((el) => el).map((el) => el.path);
   next();
 });
+// Set the view engine to EJS
 app.use(expressLayouts);
-app.use(express.json());
 app.set("view engine", "ejs");
 app.set("layout", "./partials/layout.ejs");
 app.use("", express.static("public"));
